@@ -16,14 +16,14 @@ module.exports = (function(_super) {
   __extends(exports, _super);
 
   function exports() {
-    this.stop = __bind(this.stop, this);
+    this.unload = __bind(this.unload, this);
     this.load = __bind(this.load, this);
     var module, _i, _len, _ref;
     this.middlewares = [];
     this.modules = {};
     exports.__super__.constructor.apply(this, arguments);
     this.on('error', function(event) {
-      return this.error(JSON.stringify(event.command.toUpperCase()));
+      return this.error(event.command.toUpperCase());
     });
     if (this.opt.modules != null) {
       _ref = this.opt.modules;
@@ -47,9 +47,9 @@ module.exports = (function(_super) {
     _results = [];
     for (_i = 0, _len = arguments.length; _i < _len; _i++) {
       arg = arguments[_i];
-      _results.push(util.log(arg, {
+      _results.push(util.log('       ' + util.inspect(arg, {
         colors: true
-      }));
+      })));
     }
     return _results;
   };
@@ -59,7 +59,7 @@ module.exports = (function(_super) {
     _results = [];
     for (_i = 0, _len = arguments.length; _i < _len; _i++) {
       arg = arguments[_i];
-      _results.push(util.log('Info: '.green + util.inspect(arg, {
+      _results.push(util.log(' Info: '.green + util.inspect(arg, {
         colors: true
       })));
     }
@@ -71,7 +71,7 @@ module.exports = (function(_super) {
     _results = [];
     for (_i = 0, _len = arguments.length; _i < _len; _i++) {
       arg = arguments[_i];
-      _results.push(util.log('Warn: '.yellow + util.inspect(arg, {
+      _results.push(util.log(' Warn: '.yellow + util.inspect(arg, {
         colors: true
       })));
     }
@@ -91,36 +91,43 @@ module.exports = (function(_super) {
   };
 
   exports.prototype.load = function(mod, cb) {
-    var err, module, msg;
+    var err, msg, _base;
     try {
-      module = require(mod);
+      if (!this.modules.hasOwnProperty(mod)) {
+        if (!(this.modules[mod] = typeof (_base = require(mod)) === "function" ? new _base(this) : void 0)) {
+          throw {
+            code: 'MODULE_IN_INCORRECT_FORMAT'
+          };
+        }
+        this.info("Loaded module " + mod);
+        return typeof cb === "function" ? cb(null) : void 0;
+      } else {
+        throw {
+          code: 'MODULE_ALREADY_LOADED'
+        };
+      }
     } catch (_error) {
       err = _error;
-      msg = err.code === 'MODULE_NOT_FOUND' ? "Module " + mod + " not found" : "Module " + mod + " cannot be loaded";
-      this.error(msg);
+      this.error(msg = (function() {
+        switch (err.code) {
+          case 'MODULE_ALREADY_LOADED':
+            return "Module " + mod + " already loaded";
+          case 'MODULE_NOT_FOUND':
+            return "Module " + mod + " not found";
+          case 'MODULE_IN_INCORRECT_FORMAT':
+            return ("Module " + mod + " is unable to") + ' load due to incorrect code format';
+          default:
+            return "Module " + mod + " cannot be loaded";
+        }
+      })());
       return typeof cb === "function" ? cb(msg) : void 0;
     }
-    if (this.modules.hasOwnProperty(mod)) {
-      msg = "Module " + mod + " already loaded";
-      this.error(msg);
-      return typeof cb === "function" ? cb(msg) : void 0;
-    }
-    this.info("Loaded module " + mod);
-    if (typeof Module === 'function') {
-      module = new Module(this);
-    }
-    this.modules[mod] = module;
-    if (typeof module.init === "function") {
-      module.init(this);
-    }
-    return typeof cb === "function" ? cb(null) : void 0;
   };
 
-  exports.prototype.stop = function(mod, cb) {
+  exports.prototype.unload = function(mod, cb) {
     var msg, _base;
     if (!this.modules.hasOwnProperty(mod)) {
-      msg = "Module " + mod + " not loaded";
-      this.error(msg);
+      this.error(msg = "Module " + mod + " not loaded");
       return typeof cb === "function" ? cb(msg) : void 0;
     }
     if (typeof (_base = this.modules[mod]).destruct === "function") {

@@ -10,7 +10,7 @@ class module.exports extends irc.Client
 
     super
 
-    @on 'error', (event) -> @error JSON.stringify event.command.toUpperCase()
+    @on 'error', (event) -> @error event.command.toUpperCase()
 
     @load module for module in @opt.modules if @opt.modules?
 
@@ -21,55 +21,54 @@ class module.exports extends irc.Client
 
     @once 'registered', -> @info "Connected to #{@opt.server}"
 
-  log: -> util.log arg, colors: true for arg in arguments
+  log: ->
+    for arg in arguments
+      util.log '       ' + util.inspect arg, colors: true
 
   info: ->
     for arg in arguments
-      util.log 'Info: '.green + util.inspect arg, colors: true
+      util.log ' Info: '.green + util.inspect arg, colors: true
 
   warn: ->
     for arg in arguments
-      util.log 'Warn: '.yellow + util.inspect arg, colors: true
+      util.log ' Warn: '.yellow + util.inspect arg, colors: true
 
   error: ->
     for arg in arguments
       util.log 'Error: '.red + util.inspect arg, colors: true
 
   load: (mod, cb) =>
+    # TODO: Proper module loading
     try
-      module = require(mod)
+      unless @modules.hasOwnProperty mod
+        unless @modules[mod] = new (require mod)? @
+          throw code: 'MODULE_IN_INCORRECT_FORMAT'
+
+        @info "Loaded module #{mod}"
+
+        cb? null
+      else throw code: 'MODULE_ALREADY_LOADED'
+
     catch err
-      msg = if err.code is 'MODULE_NOT_FOUND'
-        "Module #{mod} not found"
-      else
-        "Module #{mod} cannot be loaded"
+      @error msg = switch err.code
+        when 'MODULE_ALREADY_LOADED' then "Module #{mod} already loaded"
+        when 'MODULE_NOT_FOUND' then "Module #{mod} not found"
+        when 'MODULE_IN_INCORRECT_FORMAT' then "Module #{mod} is unable to" \
+          + ' load due to incorrect code format'
+        else "Module #{mod} cannot be loaded"
 
-      @error msg
-      return cb?(msg)
+      cb? msg
 
-    if @modules.hasOwnProperty mod
-      msg = "Module #{mod} already loaded"
-      @error msg
-      return cb?(msg)
-
-    @info "Loaded module #{mod}"
-
-    module = new Module(@) if typeof Module is 'function'
-
-    @modules[mod] = module
-
-    module.init?(@)
-
-    cb? null
-
-  stop: (mod, cb) =>
+  unload: (mod, cb) =>
+    # TODO: Proper module unloading
     unless @modules.hasOwnProperty mod
-      msg = "Module #{mod} not loaded"
-      @error msg
-      return cb?(msg)
+      @error msg = "Module #{mod} not loaded"
 
+      return cb? msg
+
+    # TODO: Unloading properly
     @modules[mod].destruct?()
-    delete require.cache[require.resolve(mod)]
+    delete require.cache[require.resolve mod]
     delete @modules[mod]
 
     @info "Stopped module #{mod}"
