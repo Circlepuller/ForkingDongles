@@ -15,11 +15,11 @@ class module.exports extends irc.Client
     @load module for module in @opt.modules if @opt.modules?
 
   connect: ->
-    @info "Connecting to #{@opt.server}"
+    @info "Connecting to \"#{@opt.server}\"..."
 
     super
 
-    @once 'registered', -> @info "Connected to #{@opt.server}"
+    @once 'registered', -> @info "Connected to \"#{@opt.server}\"."
 
   log: ->
     for arg in arguments
@@ -44,25 +44,25 @@ class module.exports extends irc.Client
         unless @modules[mod] = new (require mod)? @
           throw code: 'MODULE_IN_INCORRECT_FORMAT'
 
-        @info "Loaded module #{mod}"
+        @info "Loaded module \"#{mod}\"."
 
         cb? null
       else throw code: 'MODULE_ALREADY_LOADED'
 
     catch err
       @error msg = switch err.code
-        when 'MODULE_ALREADY_LOADED' then "Module #{mod} already loaded"
-        when 'MODULE_NOT_FOUND' then "Module #{mod} not found"
-        when 'MODULE_IN_INCORRECT_FORMAT' then "Module #{mod} is unable to" \
-          + ' load due to incorrect code format'
-        else "Module #{mod} cannot be loaded"
+        when 'MODULE_ALREADY_LOADED' then "Module \"#{mod}\" already loaded."
+        when 'MODULE_NOT_FOUND' then "Module \"#{mod}\" not found."
+        when 'MODULE_IN_INCORRECT_FORMAT' then "Module \"#{mod}\" is unable " \
+          + 'to load due to incorrect code format.'
+        else "Module \"#{mod}\" cannot be loaded."
 
       cb? msg
 
   unload: (mod, cb) =>
     # TODO: Proper module unloading
     unless @modules.hasOwnProperty mod
-      @error msg = "Module #{mod} not loaded"
+      @error msg = "Module \"#{mod}\" not loaded."
 
       return cb? msg
 
@@ -71,7 +71,7 @@ class module.exports extends irc.Client
     delete require.cache[require.resolve mod]
     delete @modules[mod]
 
-    @info "Stopped module #{mod}"
+    @info "Stopped module \"#{mod}\"."
 
     cb? null
 

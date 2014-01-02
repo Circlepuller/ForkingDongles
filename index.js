@@ -35,10 +35,10 @@ module.exports = (function(_super) {
   }
 
   exports.prototype.connect = function() {
-    this.info("Connecting to " + this.opt.server);
+    this.info("Connecting to \"" + this.opt.server + "\"...");
     exports.__super__.connect.apply(this, arguments);
     return this.once('registered', function() {
-      return this.info("Connected to " + this.opt.server);
+      return this.info("Connected to \"" + this.opt.server + "\".");
     });
   };
 
@@ -99,7 +99,7 @@ module.exports = (function(_super) {
             code: 'MODULE_IN_INCORRECT_FORMAT'
           };
         }
-        this.info("Loaded module " + mod);
+        this.info("Loaded module \"" + mod + "\".");
         return typeof cb === "function" ? cb(null) : void 0;
       } else {
         throw {
@@ -111,13 +111,13 @@ module.exports = (function(_super) {
       this.error(msg = (function() {
         switch (err.code) {
           case 'MODULE_ALREADY_LOADED':
-            return "Module " + mod + " already loaded";
+            return "Module \"" + mod + "\" already loaded.";
           case 'MODULE_NOT_FOUND':
-            return "Module " + mod + " not found";
+            return "Module \"" + mod + "\" not found.";
           case 'MODULE_IN_INCORRECT_FORMAT':
-            return ("Module " + mod + " is unable to") + ' load due to incorrect code format';
+            return ("Module \"" + mod + "\" is unable ") + 'to load due to incorrect code format.';
           default:
-            return "Module " + mod + " cannot be loaded";
+            return "Module \"" + mod + "\" cannot be loaded.";
         }
       })());
       return typeof cb === "function" ? cb(msg) : void 0;
@@ -127,7 +127,7 @@ module.exports = (function(_super) {
   exports.prototype.unload = function(mod, cb) {
     var msg, _base;
     if (!this.modules.hasOwnProperty(mod)) {
-      this.error(msg = "Module " + mod + " not loaded");
+      this.error(msg = "Module \"" + mod + "\" not loaded.");
       return typeof cb === "function" ? cb(msg) : void 0;
     }
     if (typeof (_base = this.modules[mod]).destruct === "function") {
@@ -135,7 +135,7 @@ module.exports = (function(_super) {
     }
     delete require.cache[require.resolve(mod)];
     delete this.modules[mod];
-    this.info("Stopped module " + mod);
+    this.info("Stopped module \"" + mod + "\".");
     return typeof cb === "function" ? cb(null) : void 0;
   };
 
