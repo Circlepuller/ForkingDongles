@@ -10,11 +10,18 @@ module.exports = (grunt) ->
         options:
           bare: true
     
+    docco:
+      compile:
+        src: ['./src/**/*.coffee']
+        options:
+          output: './docs/'
+
     watch:
       compile:
         files: './src/**/*.coffee'
-        tasks: ['coffee']
+        tasks: ['coffee', 'docco']
 
+  grunt.loadNpmTasks 'grunt-docco'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 

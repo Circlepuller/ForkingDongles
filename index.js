@@ -130,8 +130,8 @@ module.exports = (function(_super) {
       this.error(msg = "Module \"" + mod + "\" not loaded.");
       return typeof cb === "function" ? cb(msg) : void 0;
     }
-    if (typeof (_base = this.modules[mod]).destruct === "function") {
-      _base.destruct();
+    if (typeof (_base = this.modules[mod]).destructor === "function") {
+      _base.destructor();
     }
     delete require.cache[require.resolve(mod)];
     delete this.modules[mod];
