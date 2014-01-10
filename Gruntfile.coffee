@@ -4,7 +4,7 @@ module.exports = (grunt) ->
       compile:
         expand: true
         cwd: './src'
-        src: ['**/*.coffee']
+        src: ['**/*.litcoffee']
         dest: './'
         ext: '.js'
         options:
@@ -12,13 +12,13 @@ module.exports = (grunt) ->
     
     docco:
       compile:
-        src: ['./src/**/*.coffee']
+        src: ['./src/**/*.litcoffee']
         options:
           output: './docs/'
 
     watch:
       compile:
-        files: './src/**/*.coffee'
+        files: './src/**/*.litcoffee'
         tasks: ['coffee', 'docco']
 
   grunt.loadNpmTasks 'grunt-docco'

@@ -1,4 +1,4 @@
-var colors, irc, util, _,
+var ForkingDongles, colors, irc, util, _,
   __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
@@ -12,16 +12,16 @@ _ = require('underscore');
 
 util = require('util');
 
-module.exports = (function(_super) {
-  __extends(exports, _super);
+ForkingDongles = (function(_super) {
+  __extends(ForkingDongles, _super);
 
-  function exports() {
+  function ForkingDongles() {
     this.unload = __bind(this.unload, this);
     this.load = __bind(this.load, this);
     var module, _i, _len, _ref;
     this.middlewares = [];
     this.modules = {};
-    exports.__super__.constructor.apply(this, arguments);
+    ForkingDongles.__super__.constructor.apply(this, arguments);
     this.on('error', function(event) {
       return this.error(event.command.toUpperCase());
     });
@@ -34,15 +34,15 @@ module.exports = (function(_super) {
     }
   }
 
-  exports.prototype.connect = function() {
-    this.info("Connecting to \"" + this.opt.server + "\"...");
-    exports.__super__.connect.apply(this, arguments);
+  ForkingDongles.prototype.connect = function() {
+    this.info("Connecting to " + this.opt.server);
+    ForkingDongles.__super__.connect.apply(this, arguments);
     return this.once('registered', function() {
-      return this.info("Connected to \"" + this.opt.server + "\".");
+      return this.info("Connected to " + this.opt.server);
     });
   };
 
-  exports.prototype.log = function() {
+  ForkingDongles.prototype.log = function() {
     var arg, _i, _len, _results;
     _results = [];
     for (_i = 0, _len = arguments.length; _i < _len; _i++) {
@@ -54,7 +54,7 @@ module.exports = (function(_super) {
     return _results;
   };
 
-  exports.prototype.info = function() {
+  ForkingDongles.prototype.info = function() {
     var arg, _i, _len, _results;
     _results = [];
     for (_i = 0, _len = arguments.length; _i < _len; _i++) {
@@ -66,7 +66,7 @@ module.exports = (function(_super) {
     return _results;
   };
 
-  exports.prototype.warn = function() {
+  ForkingDongles.prototype.warn = function() {
     var arg, _i, _len, _results;
     _results = [];
     for (_i = 0, _len = arguments.length; _i < _len; _i++) {
@@ -78,7 +78,7 @@ module.exports = (function(_super) {
     return _results;
   };
 
-  exports.prototype.error = function() {
+  ForkingDongles.prototype.error = function() {
     var arg, _i, _len, _results;
     _results = [];
     for (_i = 0, _len = arguments.length; _i < _len; _i++) {
@@ -90,7 +90,7 @@ module.exports = (function(_super) {
     return _results;
   };
 
-  exports.prototype.load = function(mod, cb) {
+  ForkingDongles.prototype.load = function(mod, cb) {
     var err, msg, _base;
     try {
       if (!this.modules.hasOwnProperty(mod)) {
@@ -99,8 +99,8 @@ module.exports = (function(_super) {
             code: 'MODULE_IN_INCORRECT_FORMAT'
           };
         }
-        this.info("Loaded module \"" + mod + "\".");
-        return typeof cb === "function" ? cb(null) : void 0;
+        this.info("Loaded module " + mod + ".");
+        return typeof cb === "function" ? cb() : void 0;
       } else {
         throw {
           code: 'MODULE_ALREADY_LOADED'
@@ -111,23 +111,23 @@ module.exports = (function(_super) {
       this.error(msg = (function() {
         switch (err.code) {
           case 'MODULE_ALREADY_LOADED':
-            return "Module \"" + mod + "\" already loaded.";
+            return "Module " + mod + " already loaded.";
           case 'MODULE_NOT_FOUND':
-            return "Module \"" + mod + "\" not found.";
+            return "Module " + mod + " not found.";
           case 'MODULE_IN_INCORRECT_FORMAT':
-            return ("Module \"" + mod + "\" is unable ") + 'to load due to incorrect code format.';
+            return ("Module " + mod + " is unable ") + 'to load due to incorrect code format.';
           default:
-            return "Module \"" + mod + "\" cannot be loaded.";
+            return "Module " + mod + " cannot be loaded.";
         }
       })());
       return typeof cb === "function" ? cb(msg) : void 0;
     }
   };
 
-  exports.prototype.unload = function(mod, cb) {
+  ForkingDongles.prototype.unload = function(mod, cb) {
     var msg, _base;
     if (!this.modules.hasOwnProperty(mod)) {
-      this.error(msg = "Module \"" + mod + "\" not loaded.");
+      this.error(msg = "Module " + mod + " not loaded.");
       return typeof cb === "function" ? cb(msg) : void 0;
     }
     if (typeof (_base = this.modules[mod]).destructor === "function") {
@@ -135,27 +135,27 @@ module.exports = (function(_super) {
     }
     delete require.cache[require.resolve(mod)];
     delete this.modules[mod];
-    this.info("Stopped module \"" + mod + "\".");
-    return typeof cb === "function" ? cb(null) : void 0;
+    this.info("Stopped module " + mod);
+    return typeof cb === "function" ? cb() : void 0;
   };
 
-  exports.prototype.addListener = function() {
+  ForkingDongles.prototype.addListener = function() {
     var event, fn, middlewares, _i;
     event = arguments[0], middlewares = 3 <= arguments.length ? __slice.call(arguments, 1, _i = arguments.length - 1) : (_i = 1, []), fn = arguments[_i++];
-    return exports.__super__.addListener.call(this, event, this.wrap(fn, middlewares));
+    return ForkingDongles.__super__.addListener.call(this, event, this.wrap(fn, middlewares));
   };
 
-  exports.prototype.on = function() {
+  ForkingDongles.prototype.on = function() {
     return this.addListener.apply(this, arguments);
   };
 
-  exports.prototype.once = function() {
+  ForkingDongles.prototype.once = function() {
     var event, fn, middlewares, _i;
     event = arguments[0], middlewares = 3 <= arguments.length ? __slice.call(arguments, 1, _i = arguments.length - 1) : (_i = 1, []), fn = arguments[_i++];
-    return exports.__super__.once.call(this, event, this.wrap(fn, middlewares));
+    return ForkingDongles.__super__.once.call(this, event, this.wrap(fn, middlewares));
   };
 
-  exports.prototype.wrap = function(fn, middlewares) {
+  ForkingDongles.prototype.wrap = function(fn, middlewares) {
     var _this = this;
     return function() {
       var args;
@@ -172,11 +172,13 @@ module.exports = (function(_super) {
     };
   };
 
-  exports.prototype.use = function() {
+  ForkingDongles.prototype.use = function() {
     var _ref;
     return (_ref = this.middlewares).push.apply(_ref, arguments);
   };
 
-  return exports;
+  return ForkingDongles;
 
 })(irc.Client);
+
+module.exports.ForkingDongles = ForkingDongles;

@@ -1,5 +1,5 @@
 # ForkingDongles
-An IRC framework that supports plugin modules and middleware.
+*An IRC framework that supports plugin modules and middleware.*
 
 [Fork on GitHub](http://github.com/Circlepuller/ForkingDongles)
 
@@ -7,8 +7,12 @@ An IRC framework that supports plugin modules and middleware.
 
 [NPM Package](https://npmjs.org/package/fdongles)
 
-## Get ForkingDongles
+## Dependencies
+* `colors` - Colored log output
+* `irc` - `irc.Client` is the parent class of the framework
+* `underscore` - Utilities
 
+## Get ForkingDongles
 ```
 npm install fdongles
 ```

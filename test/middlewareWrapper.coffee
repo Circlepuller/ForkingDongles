@@ -1,7 +1,7 @@
 _      = require 'underscore'
 assert = require 'assert'
 
-Domo   = require '../index'
+{ForkingDongles} = require '../lib/index'
 
 createRes = (msg) ->
   args: ['#test', msg]
@@ -12,7 +12,7 @@ createRes = (msg) ->
 describe 'Middleware wrapper', ->
 
   it 'should pass the right arguments all the way to the final function', (done) ->
-    domo = new Domo()
+    domo = new fdongles
 
     mw1 = (res, next) ->
       assert.equal res.message, 'works'

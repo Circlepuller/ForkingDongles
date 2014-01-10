@@ -1,3 +1,6 @@
 node_modules
 .DS_Store
-bot.coffee
+.npmignore
+
+# This will be here until I have a working Cakefile to replace Grunt
+Cakefile

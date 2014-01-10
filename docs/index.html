@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>index.coffee</title>
+  <title>index.litcoffee</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -15,7 +15,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>index.coffee</h1>
+                  <h1>index.litcoffee</h1>
               </div>
           </li>
         
@@ -27,15 +27,15 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <p>Import needed libraries/modules. This includes node-irc, the framework&#39;s
-&quot;skeleton&quot;, and various utilities.</p>
+              <p>Import needed libraries/modules. This includes node-irc, the framework’s
+“skeleton”, and various utilities.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>colors = <span class="built_in">require</span> <span class="string">'colors'</span>
-irc    = <span class="built_in">require</span> <span class="string">'irc'</span>
-_      = <span class="built_in">require</span> <span class="string">'underscore'</span>
-util   = <span class="built_in">require</span> <span class="string">'util'</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>colors = <span class="hljs-built_in">require</span> <span class="hljs-string">'colors'</span>
+irc    = <span class="hljs-built_in">require</span> <span class="hljs-string">'irc'</span>
+_      = <span class="hljs-built_in">require</span> <span class="hljs-string">'underscore'</span>
+util   = <span class="hljs-built_in">require</span> <span class="hljs-string">'util'</span></pre></div></div>
             
         </li>
         
@@ -46,12 +46,12 @@ util   = <span class="built_in">require</span> <span class="string">'util'</span
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>Declare the &quot;anonymous&quot; class that is known only as ForkingDongles. Inherit
-the class attributes of node-irc&#39;s <code>Client</code> class, as we will need them.</p>
+              <p>Declare the class that is known only as ForkingDongles. Inherit
+the class attributes of node-irc’s <code>Client</code> class, as we will need them.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre><span class="class"><span class="keyword">class</span> <span class="title">module</span>.<span class="title">exports</span> <span class="keyword">extends</span> <span class="title">irc</span>.<span class="title">Client</span></span></pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ForkingDongles</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">irc</span>.<span class="hljs-title">Client</span></span></pre></div></div>
             
         </li>
         
@@ -67,7 +67,7 @@ class does. (Inheritance much?)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="attribute">constructor</span>:<span class="function"> -&gt;</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">constructor</span>:<span class="hljs-function"> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -78,12 +78,12 @@ class does. (Inheritance much?)</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Setup some variables now so we don&#39;t get unnecessary errors later.</p>
+              <p>Setup some variables now so we don’t get unnecessary errors later.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="property">@middlewares</span> = []
-    <span class="property">@modules</span> = {}</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-property">@middlewares</span> = []
+    <span class="hljs-property">@modules</span> = {}</pre></div></div>
             
         </li>
         
@@ -94,11 +94,11 @@ class does. (Inheritance much?)</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>This is where the parent contructor is called, in case you didn&#39;t know.</p>
+              <p>This is where the parent contructor is called, in case you didn’t know.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="keyword">super</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">super</span></pre></div></div>
             
         </li>
         
@@ -109,12 +109,12 @@ class does. (Inheritance much?)</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Setup an error handler, because without one, you&#39;re in the dark about
-knowing what&#39;s not working with your bot.</p>
+              <p>Setup an error handler, because without one, you’re in the dark about
+knowing what’s not working with your bot.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="property">@on</span> <span class="string">'error'</span>, <span class="function"><span class="params">(event)</span> -&gt;</span> <span class="property">@error</span> event.command.toUpperCase()</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-property">@on</span> <span class="hljs-string">'error'</span>, <span class="hljs-function"><span class="hljs-params">(event)</span> -&gt;</span> <span class="hljs-property">@error</span> event.command.toUpperCase()</pre></div></div>
             
         </li>
         
@@ -129,7 +129,7 @@ knowing what&#39;s not working with your bot.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="property">@load</span> <span class="built_in">module</span> <span class="keyword">for</span> <span class="built_in">module</span> <span class="keyword">in</span> <span class="property">@opt</span>.modules <span class="keyword">if</span> <span class="property">@opt</span>.modules?</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-property">@load</span> <span class="hljs-built_in">module</span> <span class="hljs-keyword">for</span> <span class="hljs-built_in">module</span> <span class="hljs-keyword">in</span> <span class="hljs-property">@opt</span>.modules <span class="hljs-keyword">if</span> <span class="hljs-property">@opt</span>.modules?</pre></div></div>
             
         </li>
         
@@ -140,12 +140,12 @@ knowing what&#39;s not working with your bot.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>This does that same thing as node-irc&#39;s <code>Client.prototype.connect</code>, but is
+              <p>This does that same thing as node-irc’s <code>Client.prototype.connect</code>, but is
 slightly more verbose.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="attribute">connect</span>:<span class="function"> -&gt;</span></pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">connect</span>:<span class="hljs-function"> -&gt;</span></pre></div></div>
             
         </li>
         
@@ -160,9 +160,9 @@ slightly more verbose.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="property">@info</span> <span class="string">"Connecting to \"<span class="subst">#{<span class="property">@opt</span>.server}</span>\"..."</span>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-property">@info</span> <span class="hljs-string">"Connecting to <span class="hljs-subst">#{<span class="hljs-property">@opt</span>.server}</span>"</span>
 
-    <span class="keyword">super</span></pre></div></div>
+    <span class="hljs-keyword">super</span></pre></div></div>
             
         </li>
         
@@ -177,23 +177,23 @@ slightly more verbose.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="property">@once</span> <span class="string">'registered'</span>,<span class="function"> -&gt;</span> <span class="property">@info</span> <span class="string">"Connected to \"<span class="subst">#{<span class="property">@opt</span>.server}</span>\"."</span>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-property">@once</span> <span class="hljs-string">'registered'</span>,<span class="hljs-function"> -&gt;</span> <span class="hljs-property">@info</span> <span class="hljs-string">"Connected to <span class="hljs-subst">#{<span class="hljs-property">@opt</span>.server}</span>"</span>
 
-  <span class="attribute">log</span>:<span class="function"> -&gt;</span>
-    <span class="keyword">for</span> arg <span class="keyword">in</span> arguments
-      util.log <span class="string">'       '</span> + util.inspect arg, <span class="attribute">colors</span>: <span class="literal">true</span>
+  <span class="hljs-attribute">log</span>:<span class="hljs-function"> -&gt;</span>
+    <span class="hljs-keyword">for</span> arg <span class="hljs-keyword">in</span> arguments
+      util.log <span class="hljs-string">'       '</span> + util.inspect arg, <span class="hljs-attribute">colors</span>: <span class="hljs-literal">true</span>
 
-  <span class="attribute">info</span>:<span class="function"> -&gt;</span>
-    <span class="keyword">for</span> arg <span class="keyword">in</span> arguments
-      util.log <span class="string">' Info: '</span>.green + util.inspect arg, <span class="attribute">colors</span>: <span class="literal">true</span>
+  <span class="hljs-attribute">info</span>:<span class="hljs-function"> -&gt;</span>
+    <span class="hljs-keyword">for</span> arg <span class="hljs-keyword">in</span> arguments
+      util.log <span class="hljs-string">' Info: '</span>.green + util.inspect arg, <span class="hljs-attribute">colors</span>: <span class="hljs-literal">true</span>
 
-  <span class="attribute">warn</span>:<span class="function"> -&gt;</span>
-    <span class="keyword">for</span> arg <span class="keyword">in</span> arguments
-      util.log <span class="string">' Warn: '</span>.yellow + util.inspect arg, <span class="attribute">colors</span>: <span class="literal">true</span>
+  <span class="hljs-attribute">warn</span>:<span class="hljs-function"> -&gt;</span>
+    <span class="hljs-keyword">for</span> arg <span class="hljs-keyword">in</span> arguments
+      util.log <span class="hljs-string">' Warn: '</span>.yellow + util.inspect arg, <span class="hljs-attribute">colors</span>: <span class="hljs-literal">true</span>
 
-  <span class="attribute">error</span>:<span class="function"> -&gt;</span>
-    <span class="keyword">for</span> arg <span class="keyword">in</span> arguments
-      util.log <span class="string">'Error: '</span>.red + util.inspect arg, <span class="attribute">colors</span>: <span class="literal">true</span></pre></div></div>
+  <span class="hljs-attribute">error</span>:<span class="hljs-function"> -&gt;</span>
+    <span class="hljs-keyword">for</span> arg <span class="hljs-keyword">in</span> arguments
+      util.log <span class="hljs-string">'Error: '</span>.red + util.inspect arg, <span class="hljs-attribute">colors</span>: <span class="hljs-literal">true</span></pre></div></div>
             
         </li>
         
@@ -209,24 +209,24 @@ serious flaws.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="attribute">load</span>: <span class="function"><span class="params">(mod, cb)</span> =&gt;</span>
-    <span class="keyword">try</span>
-      <span class="keyword">unless</span> <span class="property">@modules</span>.hasOwnProperty mod
-        <span class="keyword">unless</span> <span class="property">@modules</span>[mod] = <span class="keyword">new</span> (<span class="built_in">require</span> mod)? @
-          <span class="keyword">throw</span> <span class="attribute">code</span>: <span class="string">'MODULE_IN_INCORRECT_FORMAT'</span>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">load</span>: <span class="hljs-function"><span class="hljs-params">(mod, cb)</span> =&gt;</span>
+    <span class="hljs-keyword">try</span>
+      <span class="hljs-keyword">unless</span> <span class="hljs-property">@modules</span>.hasOwnProperty mod
+        <span class="hljs-keyword">unless</span> <span class="hljs-property">@modules</span>[mod] = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">require</span> mod)? @
+          <span class="hljs-keyword">throw</span> <span class="hljs-attribute">code</span>: <span class="hljs-string">'MODULE_IN_INCORRECT_FORMAT'</span>
 
-        <span class="property">@info</span> <span class="string">"Loaded module \"<span class="subst">#{mod}</span>\"."</span>
+        <span class="hljs-property">@info</span> <span class="hljs-string">"Loaded module <span class="hljs-subst">#{mod}</span>."</span>
 
-        cb? <span class="literal">null</span>
-      <span class="keyword">else</span> <span class="keyword">throw</span> <span class="attribute">code</span>: <span class="string">'MODULE_ALREADY_LOADED'</span>
+        cb?()
+      <span class="hljs-keyword">else</span> <span class="hljs-keyword">throw</span> <span class="hljs-attribute">code</span>: <span class="hljs-string">'MODULE_ALREADY_LOADED'</span>
 
-    <span class="keyword">catch</span> err
-      <span class="property">@error</span> msg = <span class="keyword">switch</span> err.code
-        <span class="keyword">when</span> <span class="string">'MODULE_ALREADY_LOADED'</span> <span class="keyword">then</span> <span class="string">"Module \"<span class="subst">#{mod}</span>\" already loaded."</span>
-        <span class="keyword">when</span> <span class="string">'MODULE_NOT_FOUND'</span> <span class="keyword">then</span> <span class="string">"Module \"<span class="subst">#{mod}</span>\" not found."</span>
-        <span class="keyword">when</span> <span class="string">'MODULE_IN_INCORRECT_FORMAT'</span> <span class="keyword">then</span> <span class="string">"Module \"<span class="subst">#{mod}</span>\" is unable "</span> \
-          + <span class="string">'to load due to incorrect code format.'</span>
-        <span class="keyword">else</span> <span class="string">"Module \"<span class="subst">#{mod}</span>\" cannot be loaded."</span>
+    <span class="hljs-keyword">catch</span> err
+      <span class="hljs-property">@error</span> msg = <span class="hljs-keyword">switch</span> err.code
+        <span class="hljs-keyword">when</span> <span class="hljs-string">'MODULE_ALREADY_LOADED'</span> <span class="hljs-keyword">then</span> <span class="hljs-string">"Module <span class="hljs-subst">#{mod}</span> already loaded."</span>
+        <span class="hljs-keyword">when</span> <span class="hljs-string">'MODULE_NOT_FOUND'</span> <span class="hljs-keyword">then</span> <span class="hljs-string">"Module <span class="hljs-subst">#{mod}</span> not found."</span>
+        <span class="hljs-keyword">when</span> <span class="hljs-string">'MODULE_IN_INCORRECT_FORMAT'</span> <span class="hljs-keyword">then</span> <span class="hljs-string">"Module <span class="hljs-subst">#{mod}</span> is unable "</span> \
+          + <span class="hljs-string">'to load due to incorrect code format.'</span>
+        <span class="hljs-keyword">else</span> <span class="hljs-string">"Module <span class="hljs-subst">#{mod}</span> cannot be loaded."</span>
 
       cb? msg</pre></div></div>
             
@@ -244,11 +244,11 @@ them.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="attribute">unload</span>: <span class="function"><span class="params">(mod, cb)</span> =&gt;</span>
-    <span class="keyword">unless</span> <span class="property">@modules</span>.hasOwnProperty mod
-      <span class="property">@error</span> msg = <span class="string">"Module \"<span class="subst">#{mod}</span>\" not loaded."</span>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-attribute">unload</span>: <span class="hljs-function"><span class="hljs-params">(mod, cb)</span> =&gt;</span>
+    <span class="hljs-keyword">unless</span> <span class="hljs-property">@modules</span>.hasOwnProperty mod
+      <span class="hljs-property">@error</span> msg = <span class="hljs-string">"Module <span class="hljs-subst">#{mod}</span> not loaded."</span>
 
-      <span class="keyword">return</span> cb? msg</pre></div></div>
+      <span class="hljs-keyword">return</span> cb? msg</pre></div></div>
             
         </li>
         
@@ -263,28 +263,30 @@ them.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="property">@modules</span>[mod].destructor?()
-    <span class="keyword">delete</span> require.cache[require.resolve mod]
-    <span class="keyword">delete</span> <span class="property">@modules</span>[mod]
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-property">@modules</span>[mod].destructor?()
+    <span class="hljs-keyword">delete</span> <span class="hljs-built_in">require</span>.cache[<span class="hljs-built_in">require</span>.resolve mod]
+    <span class="hljs-keyword">delete</span> <span class="hljs-property">@modules</span>[mod]
 
-    <span class="property">@info</span> <span class="string">"Stopped module \"<span class="subst">#{mod}</span>\"."</span>
+    <span class="hljs-property">@info</span> <span class="hljs-string">"Stopped module <span class="hljs-subst">#{mod}</span>"</span>
 
-    cb? <span class="literal">null</span>
+    cb?()
 
-  <span class="attribute">addListener</span>: <span class="function"><span class="params">(event, middlewares..., fn)</span> -&gt;</span>
-    <span class="keyword">super</span> event, <span class="property">@wrap</span> fn, middlewares
+  <span class="hljs-attribute">addListener</span>: <span class="hljs-function"><span class="hljs-params">(event, middlewares..., fn)</span> -&gt;</span>
+    <span class="hljs-keyword">super</span> event, <span class="hljs-property">@wrap</span> fn, middlewares
 
-  <span class="attribute">on</span>:<span class="function"> -&gt;</span> <span class="property">@addListener</span> arguments...
+  <span class="hljs-attribute">on</span>:<span class="hljs-function"> -&gt;</span> <span class="hljs-property">@addListener</span> arguments...
 
-  <span class="attribute">once</span>: <span class="function"><span class="params">(event, middlewares..., fn)</span> -&gt;</span> <span class="keyword">super</span> event, <span class="property">@wrap</span> fn, middlewares
+  <span class="hljs-attribute">once</span>: <span class="hljs-function"><span class="hljs-params">(event, middlewares..., fn)</span> -&gt;</span> <span class="hljs-keyword">super</span> event, <span class="hljs-property">@wrap</span> fn, middlewares
 
-  <span class="attribute">wrap</span>: <span class="function"><span class="params">(fn, middlewares)</span> -&gt;</span> <span class="function"><span class="params">(args...)</span> =&gt;</span>
-    _.reduceRight<span class="function"><span class="params">(<span class="property">@middlewares</span>.concat(middlewares), (memo, item) =&gt;
+  <span class="hljs-attribute">wrap</span>: <span class="hljs-function"><span class="hljs-params">(fn, middlewares)</span> -&gt;</span> <span class="hljs-function"><span class="hljs-params">(args...)</span> =&gt;</span>
+    _.reduceRight<span class="hljs-function"><span class="hljs-params">(<span class="hljs-property">@middlewares</span>.concat(middlewares), (memo, item) =&gt;
       next = =&gt; memo.apply @, args
-      <span class="keyword">return</span> -&gt; item.apply @, [args..., next]
-    , fn)</span>.<span class="title">apply</span> @, <span class="title">arguments</span>
+      <span class="hljs-keyword">return</span> -&gt; item.apply @, [args..., next]
+    , fn)</span>.<span class="hljs-title">apply</span> @, <span class="hljs-title">arguments</span>
 
-  <span class="title">use</span>: -&gt;</span> <span class="property">@middlewares</span>.push arguments...</pre></div></div>
+  <span class="hljs-title">use</span>: -&gt;</span> <span class="hljs-property">@middlewares</span>.push arguments...
+
+<span class="hljs-built_in">module</span>.<span class="hljs-built_in">exports</span>.ForkingDongles = ForkingDongles</pre></div></div>
             
         </li>
         

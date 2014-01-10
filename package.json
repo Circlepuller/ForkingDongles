@@ -1,34 +1,7 @@
 {
   "name": "fdongles",
   "version": "0.4.0",
-  "engines": {
-    "node": "~0.10.24"
-  },
-  "dependencies": {
-    "irc": "git://github.com/kingcody/node-irc.git",
-    "underscore": "~1.4.4",
-    "colors": "~0.6.2"
-  },
-  "readmeFilename": "README.md",
   "description": "An IRC framework that supports plugin modules and middleware",
-  "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-docco": "~0.3.0",
-    "grunt-contrib-coffee": "~0.8.0",
-    "grunt-contrib-watch": "~0.5.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/Circlepuller/ForkingDongles.git"
-  },
-  "keywords": [
-    "irc",
-    "bot",
-    "fdongles",
-    "forkingdongles",
-    "forking",
-    "dongles"
-  ],
   "contributors": [
     {
       "name": "Riku Rouvila",
@@ -39,5 +12,35 @@
       "email": "dsaunders@dansaunders.me"
     }
   ],
-  "license": "BSD"
+  "main": "./lib/index",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Circlepuller/ForkingDongles.git"
+  },
+  "keywords": [
+    "irc",
+    "bot",
+    "fdongles",
+    "forkingdongles",
+    "forking",
+    "dongles",
+    "fd",
+    "modular",
+    "pluggable"
+  ],
+  "dependencies": {
+    "irc": "git://github.com/kingcody/node-irc.git",
+    "underscore": "~1.4.4",
+    "colors": "~0.6.2"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-docco": "~0.3.0",
+    "grunt-contrib-coffee": "~0.8.0",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "license": "BSD",
+  "engines": {
+    "node": "~0.10.24"
+  }
 }
