@@ -17,4 +17,4 @@
 npm install fdongles
 ```
 
-*****Updated documentation coming soon.*****
+<sup>*Updated documentation coming soon.*</sup>
