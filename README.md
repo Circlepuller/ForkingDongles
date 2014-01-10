@@ -9,8 +9,10 @@
 
 ## Dependencies
 * `colors` - Colored log output
-* `irc` - `irc.Client` is the parent class of the framework
+* `irc` - Used as a parent for the framework<sup>*</sup>
 * `underscore` - Utilities
+
+<small>* Uses a forked version in order to be compatible with the current version of Node.JS</small>
 
 ## Get ForkingDongles
 ```
